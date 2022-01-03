@@ -1,0 +1,15 @@
+  method CLIENTESET_GET_ENTITY.
+
+   DATA:ls_entity TYPE zcl_zmonitorvendas_ron_mpc=>ts_cliente.
+
+    io_tech_request_context->get_converted_keys(
+      IMPORTING
+        es_key_values = ls_entity
+    ).
+
+    SELECT SINGLE *
+     FROM ztab_clientes
+     INTO CORRESPONDING FIELDS OF er_entity
+     WHERE id = ls_entity-id.
+
+  endmethod.
